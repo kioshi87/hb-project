@@ -23,15 +23,19 @@ class Coupons(db.Model):
 
     __tablename__ = 'coupons'
 
-    offer_id = db.Column(db.Integer,
+    lmd_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True,
                         nullable=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
+    type = db.Column(db.String)
     code = db.Column(db.String)
-    source = db.Column(db.String)
+    offer = db.Column(db.String)
+    offer_value = db.Column(db.String)
+    store = db.Column(db.String)
     url = db.Column(db.url)
+    image = db.Column(db.url)
     categories = db.Column(db.String)
     start_date = db.Column(db.date)
     end_date = db.Column(db.date)
@@ -49,7 +53,7 @@ class userAccounts(db.Model):
                             primary_key=True,
                             nullable=True)
     user_id = db.Column(db.Integer)
-    offer_id = db.Column(db.Integer)
+    lmd_id = db.Column(db.Integer)
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
