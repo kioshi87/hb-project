@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -29,7 +30,7 @@ class Coupons(db.Model):
                         nullable=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
-    type = db.Column(db.String)
+    reward_type = db.Column(db.String)
     code = db.Column(db.String)
     offer = db.Column(db.String)
     offer_value = db.Column(db.String)
