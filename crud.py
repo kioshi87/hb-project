@@ -1,3 +1,5 @@
+"""CRUD operations."""
+
 from model import db, Users, Coupons, userAccounts, connect_to_db
 
 

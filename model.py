@@ -28,19 +28,20 @@ class Coupons(db.Model):
                         autoincrement=True,
                         primary_key=True,
                         nullable=True)
+    store = db.Column(db.String)                    
     title = db.Column(db.String)
     description = db.Column(db.String)
     reward_type = db.Column(db.String)
     code = db.Column(db.String)
     offer = db.Column(db.String)
     offer_value = db.Column(db.String)
-    store = db.Column(db.String)
     url = db.Column(db.url)
-    image = db.Column(db.url)
+    image_url = db.Column(db.url)
+    smartLink = db.Column(db.url)
     categories = db.Column(db.String)
+    status = db.Column(db.String)
     start_date = db.Column(db.date)
     end_date = db.Column(db.date)
-    status = db.Column(db.String)
 
 
 class userAccounts(db.Model):
@@ -53,8 +54,8 @@ class userAccounts(db.Model):
                             autoincrement=True,
                             primary_key=True,
                             nullable=True)
-    user_id = db.Column(db.Integer)
-    lmd_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    lmd_id = db.Column(db.Integer, db.ForeignKey('coupons.lmd'))
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
