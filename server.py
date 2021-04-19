@@ -1,24 +1,51 @@
-"""Server for movie ratings app."""
+"""Server for copoun account app."""
 
-from flask import Flask
+from flask import (Flask, render_template, request, flash, session,
+                   redirect)
+from model import connect_to_db
+import crud
+
+from jinja2 import StrictUndefined
 
 app = Flask(__name__)
+#app.secret_key = ""
+app.jinja_env.undefined = StrictUndefined
 
 
-# Replace this with routes and view functions!
-@app.route('/register', methods=['POST'])
-def register_user():
-    email = request.form['email']
-    password = request.form['password']
-    username = request.form['username']
+@app.route('/')
+def homepage():
+    """View homepage."""
 
-    user = get_user_by_email(email)
+    return render_template('homepage.html')
+
+@app.route('/coupons')
+def coupon_search():
+    """ Search coupons """
+
+    coupon = crud.create_coupon()
+
+    return render_template('coupons.html', coupon)
+
+
+@app.route('/useraccounts', methods=['POST'])
+def create_account():
+    """ Create user account"""
+
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
     if user:
-        return 'A user already exists with that email.'
+        flash('Cannot create an account with that email. Try again.')
     else:
-        create_user(email, password, username)
+        crud.create_user(username, email, password)
+        flash('Account created! Please log in.')
 
-        return redirect('/login-form')
+    #user_account = crud.create_user_account()
+
+    return redirect('/')
+
 
 
 if __name__ == '__main__':

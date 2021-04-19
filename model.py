@@ -5,7 +5,7 @@ db = SQLAlchemy()
 
 
 # Replace this with your code!
-class Users(dm.Model):
+class User(db.Model):
     """A user."""
 
     __tablename__ = 'users'
@@ -19,7 +19,7 @@ class Users(dm.Model):
     password = db.Column(db.String)
 
 
-class Coupons(db.Model):
+class Coupon(db.Model):
     """Coupon Codes"""
 
     __tablename__ = 'coupons'
@@ -35,16 +35,16 @@ class Coupons(db.Model):
     code = db.Column(db.String)
     offer = db.Column(db.String)
     offer_value = db.Column(db.String)
-    url = db.Column(db.url)
-    image_url = db.Column(db.url)
-    smartLink = db.Column(db.url)
+    url = db.Column(db.String)
+    image_url = db.Column(db.String)
+    smartLink = db.Column(db.String)
     categories = db.Column(db.String)
     status = db.Column(db.String)
-    start_date = db.Column(db.date)
-    end_date = db.Column(db.date)
+    start_date = db.Column(db.Integer)
+    end_date = db.Column(db.Integer)
 
 
-class userAccounts(db.Model):
+class userAccount(db.Model):
     """A user_account"""
 
     __tablename__ = 'user_accounts'
@@ -55,13 +55,14 @@ class userAccounts(db.Model):
                             primary_key=True,
                             nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    lmd_id = db.Column(db.Integer, db.ForeignKey('coupons.lmd'))
+    lmd_id = db.Column(db.Integer, db.ForeignKey('coupons.lmd_id'))
 
 
-def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
-    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
-    flask_app.config['SQLALCHEMY_ECHO'] = echo
-    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+def connect_to_db(flask_app, db_uri='postgresql:///user_accounts', echo=True):  #instance of a flask, what is called from server (db_uri specifies what database to actually call)
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri   
+    flask_app.config['SQLALCHEMY_ECHO'] = echo          #accepts Boolean, defaulted to true, allows you to SQL command being ran
+    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False   
 
     db.app = flask_app
     db.init_app(flask_app)

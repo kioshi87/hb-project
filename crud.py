@@ -1,12 +1,12 @@
 """CRUD operations."""
 
-from model import db, Users, Coupons, userAccounts, connect_to_db
+from model import db, User, Coupon, userAccount, connect_to_db
 
 
 def create_user(username, email, password):
     """Create and return a new user."""
 
-    user = Users(username=username, email=email, password=password)
+    user = User(username=username, email=email, password=password)
 
     db.session.add(user)
     db.session.commit()
@@ -19,7 +19,7 @@ def create_coupon(title, description, reward_type, code, offer, offer_value, sto
     """Create and return a coupon"""
 
 
-    coupon = Coupons(title=title,
+    coupon = Coupon(title=title,
                     description=description,
                     reward_type=reward_type,
                     code=code,
@@ -41,7 +41,7 @@ def create_coupon(title, description, reward_type, code, offer, offer_value, sto
 def create_user_account(user, lmd):
     """Create and return a user account."""
     
-    account = userAccounts(user=user, lmd=lmd)
+    account = userAccount(user=user, lmd=lmd)
 
     db.session.add(account)
     db.session.commit()
