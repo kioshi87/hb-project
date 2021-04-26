@@ -3,7 +3,12 @@
 
 {% block body %}
 <h2>Create an Account</h2>
-<form action="/users" method='POST'>
+<form action="/useraccounts" method='POST'method='GET'>
+  <div class="form-group">
+    <p>
+        Username <input type="text" name="username">
+    </p>
+    
     <p>
         Email <input type="text" name="email">
     </p>
@@ -13,7 +18,8 @@
     </p>
 
     <p>
-        <input type="submit"
+        <input type="submit">
     </p>
+   </div>
 </form>
 {% endblock %}

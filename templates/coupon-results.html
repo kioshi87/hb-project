@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Afterparties!!!{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <a href="/coupon_search" class="lead backlink">
+          Go back to the search form
+        </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div id="results-as-json">
+          <h2>Results as JSON</h2>
+          <pre>{{ pformat(data) }}</pre>
+        </div>
+
+        <div id="coupon-search-results">
+          <h2>Coupon Search Results</h2>
+
+          <p>
+            <span id="result-count">
+              {{ data['page']['totalElements'] }}
+            </span> 
+            coupons matched your search.
+          </p>
+
+          <ul class="coupons-list list-group">
+            {% for coupons in results %}
+            <li class="list-group-item list-group-item-action">
+                <div class="row">
+                  <div class="col-2">
+                    <img src="{{ coupon['image'][0]['url'] }}">
+                  </div>
+
+                  <div class="col">
+                    <div class="d-flex w-100 justify-content-between">
+                      <a href="/coupon/{{ coupon['id'] }}" target="_blank">
+                        <h5>{{ coupon['name'] }}</h5>
+                      </a>
+                      <small>{{ coupon['description']['offer_value']['start_date']['end_dQAate'] }}</small>
+                    </div>
+                  </div>
+                </div>
+              </li>  
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

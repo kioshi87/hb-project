@@ -12,6 +12,18 @@ def create_user(username, email, password):
     db.session.commit()
 
     return user
+    
+
+def get_user_by_username(username):
+    """Return a user by username"""
+
+    return User.query.filter(User.username == username).first()
+
+
+def get_user_by_email(email):
+    """Return a user by email"""
+
+    return User.query.filter(User.email == email).first()
 
 
 def create_coupon(title, description, reward_type, code, offer, offer_value, store, url,
@@ -20,7 +32,7 @@ def create_coupon(title, description, reward_type, code, offer, offer_value, sto
 
 
     coupon = Coupon(title=title,
-                    description=description,
+                    description=    description,
                     reward_type=reward_type,
                     code=code,
                     offer=offer,
