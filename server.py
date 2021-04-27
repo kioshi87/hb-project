@@ -60,7 +60,7 @@ def coupon_search():
                             results=copouns)
 
 
-@app.route('/useraccounts2')
+@app.route('/user_account')
 def get_account_data():
     """GET user account data"""
 
@@ -87,6 +87,42 @@ def create_account():
     return redirect('/coupon_search') #redirect cto another app-route to get to an html use render_template
 
 
+@app.route("/login", methods=["GET"])
+def show_login():
+    """Show login form."""
+
+    return render_template("login.html")
+
+
+@app.route("/login", methods=["POST"])
+def process_login():
+    """Log user into site."""
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+
+    if not user:
+        flash("No such email address.")
+        return redirect('/login')
+
+    if user.password != password:
+        flash("Incorrect password.")
+        return redirect("/login")
+
+    session["logged_in_user_id"] = user.id
+    flash("Logged in.")
+    return redirect("/user_account")
+
+
+@app.route("/logout")
+def process_logout():
+    """Log user out."""
+
+    del session["logged_in_user_id"]
+    flash("Logged out.")
+    return redirect("/")
 
 if __name__ == '__main__':
     connect_to_db(app)

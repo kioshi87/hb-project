@@ -10,6 +10,16 @@
     {% block head %}{% endblock %}
   </head>
   <body>
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/coupon_search">Coupon</a>
+      <div class="login-container" >
+        <form action="/login" method="GET">
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
     {% for msg in get_flashed_messages() %}
       <p class="flash-msg">
         {{ msg }}
