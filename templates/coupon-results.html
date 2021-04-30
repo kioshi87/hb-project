@@ -30,23 +30,29 @@
           </p>
 
           <ul class="coupons-list list-group">
-            {% for coupons in results %}
+            {% for coupon in data %}
             <li class="list-group-item list-group-item-action">
+              <form> 
                 <div class="row">
                   <div class="col-2">
-                    <img src="{{ coupon['image'][0]['url'] }}">
+                    <img src="{{ coupon['image_url'][0]['url'] }}">
                   </div>
 
                   <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                       <a href="/coupon/{{ coupon['id'] }}" target="_blank">
+                        <input type="radio" name="coupon_choice" value="coupon">
                         <h5>{{ coupon['name'] }}</h5>
                       </a>
-                      <small>{{ coupon['description']['offer_value']['start_date']['end_dQAate'] }}</small>
+                      <small>{{ coupon['description']['offer_value']['start_date']['end_date'] }}</small>
                     </div>
                   </div>
                 </div>
-              </li>  
+            
+                <button class="btn btn-lg btn-primary btn-block" type="Save">Save Coupon
+                </button>
+              </form>
+            </li>  
             {% endfor %}
           </ul>
         </div>

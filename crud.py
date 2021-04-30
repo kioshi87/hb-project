@@ -20,26 +20,26 @@ def get_user_by_username(username):
     return User.query.filter(User.username == username).first()
 
 
-def get_user_by_email(email):
+def get_user_by_email_and_user_id(email, user_id):
     """Return a user by email"""
 
-    return User.query.filter(User.email == email).first()
+    return User.query.filter(User.email == email, User.user_id == user_id).first()
 
 
-def create_coupon(title, description, reward_type, code, offer, offer_value, store, url,
-                  image, categories, start_date, end_date, status):
+def create_coupon(offer_id, title, description, code, source, url, affiliate_link,
+                  image_url, store, categories, start_date, end_date, status):
     """Create and return a coupon"""
 
 
-    coupon = Coupon(title=title,
-                    description=    description,
-                    reward_type=reward_type,
+    coupon = Coupon(offer_id=offer_id,
+                    title=title,
+                    description=description,
                     code=code,
-                    offer=offer,
-                    offer_value=offer_value,
-                    store=store,
+                    source=source,
                     url=url,
-                    image=image,
+                    affiliate_link =affiliate_link,
+                    image_url=image_url,
+                    store = store,
                     categories=categories,
                     start_date=start_date,
                     end_date=end_date,

@@ -24,24 +24,22 @@ class Coupon(db.Model):
 
     __tablename__ = 'coupons'
 
-    lmd_id = db.Column(db.Integer,
+    offer_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True,
                         nullable=True)
-    store = db.Column(db.String)                    
     title = db.Column(db.String)
     description = db.Column(db.String)
-    reward_type = db.Column(db.String)
     code = db.Column(db.String)
-    offer = db.Column(db.String)
-    offer_value = db.Column(db.String)
+    source = db.Column(db.String)
     url = db.Column(db.String)
+    affiliate_link = db.Column(db.String)
     image_url = db.Column(db.String)
-    smartLink = db.Column(db.String)
+    store = db.Column(db.String)
     categories = db.Column(db.String)
-    status = db.Column(db.String)
     start_date = db.Column(db.Integer)
     end_date = db.Column(db.Integer)
+    status = db.Column(db.String)
 
 
 class userAccount(db.Model):
