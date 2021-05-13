@@ -1,5 +1,7 @@
+
 {% extends 'base.html' %}
-{% block title %}Couponista Home{% endblock %}
+
+{% block title %}Coupon Search{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -7,14 +9,11 @@
       <div class="col">
         <h2>Search for Coupons</h2>
   
-        <form method="GET" action="/coupon/search">
+        <form method="GET" action="/coupon/search" >
           <div class="form-group">
             <label for="search-category">Search Category</label>
           </br>
           </br>
-            <small class="form-text text-muted">
-              Leave this blank to get all Coupons!
-            </small>
           </br>
           </br>
             <input

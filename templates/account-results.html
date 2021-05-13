@@ -1,12 +1,33 @@
 {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-{% block title %}Couponista Account{% endblock %}
+{% block title %}Account Results{% endblock %}
 
-{% block content %}
+{% block body %}
 
 <h2>You are now a COUPONISTA!!!</h2>
 
-<p>{{ user.username }}, Search to your hearts desire!!</p>
-<li><a href="/coupon">Coupons</a></li>
+<!-- <p>{{ user.username }}, Search to your hearts desire!!</p> > 
+<li><a href="/coupon">Coupons</a></li> -->
 
-{% endblock %}
+{% for coupon in all_user_accounts %}
+
+    <div class="row list-group-item list-group-item-action" style="height: 200">
+        <div>
+            <img src="{{ coupon['image_url'] }}">
+        </div>
+
+        <div>
+        <h2>{{ coupon['title'] }}</h2> 
+            <p>
+                Store: {{ coupon['store'] }}<br>
+                Website: {{ coupon['url'] }}<br>
+                Code: {{ coupon['code'] }}<br>
+                Start date: {{ coupon['start_date'] }}<br>
+                End date: {{ coupon['end_date'] }}<br>
+                Description: {{ coupon['description'] }}<br>
+            </p>
+        </div>
+    </div>
+
+    {% endblock %}

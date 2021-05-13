@@ -1,62 +1,40 @@
 {% extends 'base.html' %}
 
-{% block title %}Afterparties!!!{% endblock %}
+{% block title %}Coupon Results{% endblock %}
 
-{% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col d-flex justify-content-center">
-        <a href="/coupon_search" class="lead backlink">
-          Go back to the search form
-        </a>
-      </div>
-    </div>
+{% block body %}
 
-    <div class="row">
-      <div class="col">
-        <div id="results-as-json">
-          <h2>Results as JSON</h2>
-          <pre>{{ pformat(data) }}</pre>
-        </div>
+<div class="container">
 
-        <div id="coupon-search-results">
-          <h2>Coupon Search Results</h2>
-
-          <p>
-            <span id="result-count">
-              {{ data['page']['totalElements'] }}
-            </span> 
-            coupons matched your search.
-          </p>
-
-          <ul class="coupons-list list-group">
-            {% for coupon in data %}
-            <li class="list-group-item list-group-item-action">
-              <form> 
-                <div class="row">
-                  <div class="col-2">
-                    <img src="{{ coupon['image_url'][0]['url'] }}">
-                  </div>
-
-                  <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                      <a href="/coupon/{{ coupon['id'] }}" target="_blank">
-                        <input type="radio" name="coupon_choice" value="coupon">
-                        <h5>{{ coupon['name'] }}</h5>
-                      </a>
-                      <small>{{ coupon['description']['offer_value']['start_date']['end_date'] }}</small>
-                    </div>
-                  </div>
-                </div>
-            
-                <button class="btn btn-lg btn-primary btn-block" type="Save">Save Coupon
-                </button>
-              </form>
-            </li>  
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
+  <div id="row coupon-search-results">
+    <h2>Coupon Search Results</h2>
   </div>
+
+  <form class="coupons-list" action="/coupon-accounts" method="POST">
+    
+    {% for coupon in coupons %}
+      <div class="row list-group-item list-group-item-action" style="height: 200">
+        <div>
+          <img src="{{ coupons['image_url'] }}" style="height: 350px">
+        </div>
+
+        <div>
+          <input type="radio" name="coupon-choice" value="{{ coupon['offer_id'] }}">
+          
+          <h5>{{ coupons['title'] }}</h5> 
+              <p>
+                {{ coupons['description'] }}<br>
+                Start date: {{ coupons['start_date'] }}
+                End date: {{ coupons['end_date'] }}
+              </p>
+        </div>
+      </div>
+    {% endfor %}
+        
+    <button class="btn btn-lg btn-primary btn-block" type="Save">
+      Save Coupon
+    </button>
+  </form>
+
+</div>
 {% endblock %}

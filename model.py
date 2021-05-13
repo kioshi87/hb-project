@@ -25,7 +25,6 @@ class Coupon(db.Model):
     __tablename__ = 'coupons'
 
     offer_id = db.Column(db.Integer,
-                        autoincrement=True,
                         primary_key=True,
                         nullable=True)
     title = db.Column(db.String)
@@ -41,6 +40,24 @@ class Coupon(db.Model):
     end_date = db.Column(db.Integer)
     status = db.Column(db.String)
 
+    def __init__(self, offer_id, title, description, code, source,
+                 url, affiliate_link, image_url, store, categories,
+                 start_date, end_date, status):
+
+        self.offer_id = offer_id
+        self.title = title
+        self.description = description
+        self.code = code
+        self.source = source
+        self.url = url
+        self.affiliate_link = affiliate_link
+        self.image_url = image_url
+        self.store = store
+        self.categories = categories
+        self.start_date = start_date
+        self.end_date = end_date
+        self.status = status
+
 
 class userAccount(db.Model):
     """A user_account"""
@@ -53,7 +70,7 @@ class userAccount(db.Model):
                             primary_key=True,
                             nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    lmd_id = db.Column(db.Integer, db.ForeignKey('coupons.lmd_id'))
+    offer_id = db.Column(db.Integer, db.ForeignKey('coupons.offer_id'))
 
 
 

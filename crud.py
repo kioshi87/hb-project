@@ -20,10 +20,17 @@ def get_user_by_username(username):
     return User.query.filter(User.username == username).first()
 
 
+def get_user_by_email(email):
+    """Return a user by email"""
+
+    return User.query.filter(User.email == email).first()
+    
+
 def get_user_by_email_and_user_id(email, user_id):
     """Return a user by email"""
 
     return User.query.filter(User.email == email, User.user_id == user_id).first()
+
 
 
 def create_coupon(offer_id, title, description, code, source, url, affiliate_link,
@@ -50,15 +57,20 @@ def create_coupon(offer_id, title, description, code, source, url, affiliate_lin
 
     return coupon
 
-def create_user_account(user, lmd):
+def create_user_account(user_id, coupon):
     """Create and return a user account."""
     
-    account = userAccount(user=user, lmd=lmd)
+    account = userAccount(user_id=user_id, offer_id=coupon.offer_id)
 
     db.session.add(account)
     db.session.commit()
 
     return account
+
+def get_user_accounts(user_id):
+    """ Returns list of all user accounts. """
+    
+    return userAccount.query.filter_by(user_id).all()
 
 
 if __name__ == '__main__':

@@ -1,1 +1,1 @@
-export COUPON_KEY="ad76046f36141e2aecadc551c2eaff2d"
+export API_KEY="d324fb829231f3cd2921b4499e7e87f7"
