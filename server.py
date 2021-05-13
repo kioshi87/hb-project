@@ -50,7 +50,7 @@ def coupon_search_page():
     return render_template('coupon-search.html')
 
 
-@app.route('/coupon/search')
+@app.route('/coupon_search')
 def coupon_search():
     """ Search coupons """
 
@@ -66,6 +66,8 @@ def coupon_search():
         for rows in f:
             if row.data == str(category):
                 coupons.append(row)
+
+                print(coupons)
             else:
                 return failure
 
