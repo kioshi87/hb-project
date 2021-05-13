@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Couponista Home{% endblock %}
+
+{% block body %}
+
+    <form class="form-signin" method="POST">
+
+        <h2 class="form-signin-heading">Please Sign In</h2>
+
+        <div class="form-group">
+            <label for="email-field" class="sr-only">Email Address</label>
+            <input type="email"
+                   name="email"
+                   class="form-control input-lg"
+                   placeholder="Email Address"
+                   required
+                   autofocus>
+        </div>
+
+        <div class="form-group">
+            <label for="password-field" class="sr-only">Password</label>
+            <input type="password"
+                   name="password"
+                   class="form-control input-lg"
+                   placeholder="Password"
+                   required>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In
+        </button>
+
+    </form>
+
+</br>
+</br>
+<div class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081')">
+<!-- Put anything you want here! There is just a spacer below for demo purposes!-->
+    <div style="height: 200px"></div>
+</div>
+
+{% endblock %}
